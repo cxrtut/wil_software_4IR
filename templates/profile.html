@@ -41,20 +41,20 @@
         <div class="containerB">
             <div class="search_date">
                 <h2>Check Equipment Availability</h2>
-                <form id="availability-form" method="POST" action="{% url 'check_availability' %}">
+                <form id="availability-form" method="POST" action="#" onsubmit="checkAvailability(event)">
                     {% csrf_token %}
                     <label for="start_date">Rent Date:</label>
                     <input type="date" id="start_date" name="start_date" required>
-                    <hr style="border: none;">
+    
                     <label for="end_date">Return Date:</label>
                     <input type="date" id="end_date" name="end_date" required>
-                    <hr style="border: none;">
+    
                     <button type="submit">Check Availability</button>
                 </form>
-                
-                
+                <div id="availability-results"></div>  <!-- This will show the available equipment -->
             </div>
         </div>
+    </div>
 
         <div class="containerC" >
             {% if messages %}
@@ -131,7 +131,7 @@
     </div>
 </div>
 
-
+<div id="availability-results"></div>
             <section class="containers">
                 <h2>Tents</h2>
                 <div class="items">
@@ -227,6 +227,6 @@
     </div>
 
     <script src="{% static 'javascript/scripting.js' %}"></script>
-    <script src="{% static 'javascript/cart_scripting.js' %}"></script>
+    <script src="{% static 'javascript/profile_scripting.js' %}"></script>
 </body>
 </html>

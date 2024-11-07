@@ -53,11 +53,11 @@ function toggleProfile() {
     const ori_content = document.getElementById('ori_content');
 
     if (profile.style.display === 'none') {
-        profile.style.display = 'block';
-        ori_content.style.display = 'none';
         track.style.display = 'none';
         history.style.display = 'none';
-    } else {
+        profile.style.display = 'block';
+        ori_content.style.display = 'none';
+        } else {
         profile.style.display = 'none';
         ori_content.style.display = 'block';
     }
@@ -71,6 +71,8 @@ function toggleTrack() {
     const ori_content = document.getElementById('ori_content');
 
     if (track.style.display === 'none') {
+        profile.style.display = 'none';
+        history.style.display = 'none';
         track.style.display = 'block';
         ori_content.style.display = 'none';
     } else {
@@ -87,6 +89,8 @@ function toggleHistory() {
     const ori_content = document.getElementById('ori_content');
 
     if (history.style.display === 'none') {
+        profile.style.display = 'none';
+        track.style.display = 'none';
         history.style.display = 'block';
         ori_content.style.display = 'none';
     } else {

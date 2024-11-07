@@ -254,37 +254,37 @@ def get_cart(request):
     return JsonResponse({"cart": cart, "total_price": total_price, "total_quantity": total_quantity})
 
 
-@csrf_exempt
 def check_availability(request):
     if request.method == 'POST':
+        # Get the start and end dates from the POST data
         data = json.loads(request.body)
         start_date = datetime.strptime(data['start_date'], '%Y-%m-%d').date()
         end_date = datetime.strptime(data['end_date'], '%Y-%m-%d').date()
 
-        # Retrieve all bookings overlapping with the selected date range
-        booked_equipment = BookedEquipment.objects.filter(
-            start_date__lte=end_date, end_date__gte=start_date
-        )
+        # Get the equipment that is not rented in the selected date range
+        available_equipment = []
 
-        # Calculate available quantities for each item in the available equipment
-        available_equipment = Available_Equipment.objects.all()
-        response_data = []
-
-        for equipment in available_equipment:
-            total_booked_quantity = sum(
-                item.quantity for item in booked_equipment.filter(equipment_id=equipment.id)
-            )
-            available_quantity = equipment.quantity - total_booked_quantity
-
-            if available_quantity > 0:
-                response_data.append({
+        equipment_list = Available_Equipment.objects.all()
+        for equipment in equipment_list:
+            # Check if any rental conflicts with the selected dates
+            rentals = BookedEquipment.objects.filter(name=equipment)
+            is_available = True
+            for rental in rentals:
+                # Check for overlapping dates
+                if not (end_date < rental.start_date or start_date > rental.end_date):
+                    is_available = False
+                    break
+            
+            if is_available:
+                available_equipment.append({
                     'name': equipment.name,
-                    'quantity': available_quantity
+                    'quantity': equipment.quantity,
+                    'description': equipment.description,
+                    'price_per_day': str(equipment.price_per_day),  # Convert to string for JSON
                 })
 
-        return JsonResponse({'available_equipment': response_data})
-
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+        # Return the available equipment as JSON
+        return JsonResponse({'available_equipment': available_equipment})
 
 def test(request):
     return render(request, 'test.html')
