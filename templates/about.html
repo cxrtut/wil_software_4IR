@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}About Page{% endblock  %}
+
+{% block content %}
+
+<div class="container">
+
+    <link rel="stylesheet" href="{% static "css/about.css" %}">
+
+    <button onclick="goBack()" class="back-button">Go Back</button>
+
+    <div class="about-header">
+        <h1>About RentBox</h1>
+        <p>Delivering event essentials right to your doorstep!</p>
+    </div>
+
+
+    <div class="about-content">
+        <img src="{% static "images/pictures/background-about.jpeg" %}" alt="RentBox team at work">
+        <div class="about-text">
+            <h2>Who We Are</h2>
+            <p>At RentBox, we specialize in providing top-tier event equipment rentals for events of all sizes. From weddings to corporate functions, our goal is to ensure your event runs smoothly with high-quality equipment. We are based in South Africa and cater to the entire region.</p>
+            <p>With our passion for customer satisfaction and a focus on convenience, RentBox makes event planning easier than ever. Simply browse our online catalog, choose the equipment you need, and we’ll deliver it directly to your venue.</p>
+        </div>
+    </div>
+
+
+    <div class="content-container">
+  
+        <div class="details">
+            <div class="info-section">
+                <h2 class="section-title">Our Mission</h2>
+                <p>To revolutionize event planning by providing seamless and convenient access to high-quality rental equipment, ensuring every event is a success.</p>
+            </div>
+    
+            <div class="info-section">
+                <h2 class="section-title">Our Vision</h2>
+                <p>We strive to become South Africa’s leading event equipment rental company, known for reliability, affordability, and exceptional service.</p>
+            </div>
+    
+            <div class="info-section">
+                <h2 class="section-title">Our Values</h2>
+                <p>
+                    <strong>Integrity:</strong> We value transparency and honesty in everything we do.<br>
+                    <strong>Customer Satisfaction:</strong> We go the extra mile to make sure our clients are happy.<br>
+                    <strong>Innovation:</strong> We embrace new ideas to continuously improve our services.
+                </p>
+            </div>
+        </div>
+    
+       
+        <div class="details-image">
+            <img src="{% static "images/pictures/workers.jpg" %}" alt="workers picture">
+        </div>
+    </div>
+   
+    <div class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="team-members">
+            <div class="team-member">
+                <img src="{% static "images/pictures/zelda.jpg" %}" alt="zelda's picture">
+                <h3>Zelda Mhlongo</h3>
+                <p>CEO & Founder</p>
+            </div>
+            <div class="team-member">
+                <img src="{% static "images/pictures/jane.jpg" %}" alt="jane's picture">
+                <h3>Jane Smith</h3>
+                <p>Head of Operations</p>
+            </div>
+            <div class="team-member">
+                <img src="{% static "images/pictures/mark.jpg" %}" alt="mark's picture">
+                <h3>Mark Johnson</h3>
+                <p>Marketing Director</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock  %}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/favicon_io/android-chrome-512x512.png' %}" type="image/x-icon">
+    
+    <link rel="stylesheet" href="{% static 'css/view_all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>Profile Page</title>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="containerA">
+            <div class="navbar">
+                <button class="navbar-toggler" onclick="toggleCollapse()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </button>
+                <p>
+                    Hello {{ user.username }}
+                </p><p>
+                    {% if user.profile_pic %}
+                    <img src="{{ user.profile_pic.url }}" alt="profile picture" class="profile-picture">
+                    {% endif %}
+                </p>
+                <a href="{% url 'logout' %}"><button class="logout-button">Logout</button></a>
+            </div>
+            <div class="collapse" id="navbarOptions">
+                <ul class="options">
+                    <li><button class="button" onclick="toggleProfile()">Update Personal Information</button></li>
+                    <li><button class="button" onclick="toggleTrack()">Track Current Rental</button></li>
+                    <li><button class="button" onclick="toggleHistory()">View Old Rentals</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="containerB">
+            <div class="search_date">
+                <h2>Check Equipment Availability</h2>
+                <form id="availability-form" method="POST" action="{% url 'check_availability' %}">
+                    {% csrf_token %}
+                    <label for="start_date">Rent Date:</label>
+                    <input type="date" id="start_date" name="start_date" required>
+                    <hr style="border: none;">
+                    <label for="end_date">Return Date:</label>
+                    <input type="date" id="end_date" name="end_date" required>
+                    <hr style="border: none;">
+                    <button type="submit">Check Availability</button>
+                </form>
+                
+                
+            </div>
+        </div>
+
+        <div class="containerC" >
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="section" id="profile" style="display: none;">
+                <h3>Update Personal Information</h3>
+                <form action="{% url 'update_customer' name=user.username %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ user.username }}">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" value="{{ user.mobile }}">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" value="{{ user.address }}">
+                    <label for="image">Photo:</label>
+                    <input type="file" id="image" name="image">
+                    <button type="submit" class="button">Save Changes</button>
+                </form>
+            </div>
+
+            <div class="section" id="track" style="display: none;">
+                <h3>Track Status</h3>
+                <h4>Current Rentals</h4>
+                <ul>
+                    <li><p>Currently none!</p></li>
+                </ul>
+            </div>
+
+            <div class="section" id="history" style="display: none;">
+                <h3>Old Rentals</h3>
+                <ul>
+                    <li><p>Empty!</p></li>
+                </ul>
+                <button class="button">Download Receipts</button>
+            </div>
+
+           
+<div class="cart-icon" onclick="showCartModal()">
+    🛒<span id="cart-count">0</span>
+</div>
+
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideCartModal()">&times;</span>
+        <h2>Cart Items</h2>
+        <div id="cart-items"></div>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Equipment</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price Per Equipment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div class="display">
+            <span>Total Items: </span><span id="total-items">0</span>
+            <br>
+            <span>Total Price: </span><span id="total-price">R0</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+</div>
+
+
+            <section class="containers">
+                <h2>Tents</h2>
+                <div class="items">
+                    {% for tent in tents %}
+                    <div class="item" style="padding-bottom: 90px;">
+                        <img src="{{ tent.image_url }}" alt="tents equipment" />
+                        <h3>{{ tent.name }}</h3>
+                        <p>Size: {{ tent.dimensions }} | Price: R{{ tent.price_per_day }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>quantity left: {{ tent.quantity }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>{{ tent.desc }}</p>
+                        <button onclick="addToCart('{{ tent.name }}', '{{tent.price_per_day}}', 'tent')" class="rent-button"> Rent Now</button>
+                    </div>
+                    {% empty %}
+                    <p>No tents available.</p>
+                    {% endfor %}
+                    </div>
+            </section>
+
+            <section>
+                <h2>Decor</h2>
+                <div class="items">
+                    {% for item in decor %}
+                    <div class="item">
+                        <img src="{{ item.image_url }}" alt="decor equipment" />
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: R{{ item.price_per_day }} | quantity left: {{ item.quantity }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>{{ item.desc }}</p>
+                        <button onclick="addToCart('{{ item.name }}', '{{ item.price_per_day }}', 'Decor')" class="rent-button"> Rent Now</button>
+                    </div>
+                    {% empty %}
+                    <p>No decor items available.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <h2>Catering</h2>
+                <div class="items">
+                    {% for item in catering %}
+                    <div class="item">
+                        <img src="{{ item.image_url }}" alt="catering equipment" />
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: R{{ item.price_per_day }} | quantity left: {{ item.quantity }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>{{ item.desc }}</p>
+                        <button onclick="addToCart('{{ item.name }}', '{{ item.price_per_day }}', 'Catering')" class="rent-button"> Rent Now</button>
+                    </div>
+                    {% empty %}
+                    <p>No catering items available.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <h2>Tables & Chairs</h2>
+                <div class="items">
+                    {% for item in tables_and_chairs %}
+                    <div class="item">
+                        <img src="{{ item.image_url }}" alt="tables_and_chairs equipment" />
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: R{{ item.price_per_day }} | quantity left: {{ item.quantity }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>{{ item.desc }}</p>
+                        <button onclick="addToCart('{{ item.name }}', '{{ item.price_per_day }}', 'Seatings')" class="rent-button"> Rent Now</button>
+                    </div>
+                    {% empty %}
+                    <p>No tables or chairs available.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <h2>Miscellaneous</h2>
+                <div class="items">
+                    {% for item in miscellaneous %}
+                    <div class="item">
+                        <img src="{{ item.image_url}}" alt="miscellaneous equipment" />
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: R{{ item.price_per_day }} | quantity left: {{ item.quantity }}</p>
+                        <hr style="width: 100%; margin: 10px auto;">
+                        <p>{{ item.desc }}</p>
+                        <button onclick="addToCart('{{ item.name }}', '{{ item.price_per_day }}', 'Miscellaneous')" class="rent-button"> Rent Now</button>
+                    </div>
+                    {% empty %}
+                    <p>No miscellaneous items available.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="{% static 'javascript/scripting.js' %}"></script>
+    <script src="{% static 'javascript/cart_scripting.js' %}"></script>
+</body>
+</html>

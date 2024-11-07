@@ -1,0 +1,121 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container-wrapper {
+    background-image: url(/static/images/pictures/background.jpg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+}
+
+.back-button {
+    background-color: transparent;
+    color: rgb(5, 5, 5); 
+    padding: 15px 30px;
+    border: 2px solid rgba(255, 165, 0, 0.7); 
+    cursor: pointer;
+    font-size: 20px;
+    align-self: flex-start;
+    transition: border-color 0.3s ease; 
+    border-radius: 30%;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #eec147;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(233, 200, 94);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #daa30d;
+}
+
+
+.login-container .forgot-password {
+    margin-top: 15px;
+    display: inline-block;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container .forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-container .signup-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-container .signup-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container .signup-link a:hover {
+    text-decoration: underline;
+}
+
+.messages {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+.error {
+    color: #d9534f; 
+    background-color: #f2dede; 
+    border-color: #ebccd1; 
+}
+.success {
+    color: #5cb85c; 
+    background-color: #dff0d8; 
+    border-color: #d6e9c6; 
+}

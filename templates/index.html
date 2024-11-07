@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} RentBox Home Page {% endblock  %}
+
+
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
+
+<section class="hero">
+<!--Picture-->
+    <div>
+        <h1>No.1 Small Equipment Hire Brand</h1>
+        <p>Serving All Your Equipment Hire Needs Nationwide</p>
+
+        <a class="shop-btn" href="{% url "view_all" %}">Rent Equip!</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="feature-item">
+        <h3>Strong Relationships</h3>
+        <hr style="width: 50%; margin: 10px auto;">
+        <p>Building lasting partnerships with our clients.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Best Deals</h3>
+        <hr style="width: 50%; margin: 10px auto;">
+        <p>Get the best deals on small equipment.</p>
+    </div>
+    <div class="feature-item">
+        <h3>High Standards</h3>
+        <hr style="width: 50%; margin: 10px auto;">
+        <p>Ensuring quality and standards are always met.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Superior Quality</h3>
+        <hr style="width: 50%; margin: 10px auto;">
+        <p>Only offering the highest quality equipment.</p>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="about-text">
+        <h2>SA's Number One Small Equipment Hire Brand</h2>
+        <p>RentBox is South Africa's leading event and small equipment hire service. We serve individuals, businesses, and event planners across the country, ensuring high standards of service, reliable equipment, and competitive pricing.</p>
+        <a class="shop-btn" style="color: black; " href="{% url "about" %}">Read More</a>
+    </div>
+    <div class="about-image">
+        <img src="{% static 'images/pictures/box.jpeg' %}" alt="box image">
+    </div>
+</section>
+
+<!-- Equipment Section -->
+<section class="cta-section">
+    <div class="cta-item">
+        <img src="{% static 'images/pictures/tent.jpeg' %}" alt="tents picture">
+        <h3>01 | Tents</h3>
+        <p>Our tents create perfect venues.</p>
+    </div>
+    <div class="cta-item">
+        <img src="{% static 'images/pictures/decor.jpeg' %}" alt="decor picture">
+        <h3>02 | Decor</h3>
+        <p>Add elegance with beautiful décor.</p>
+    </div>
+    <div class="cta-item">
+        <img src="{% static 'images/pictures/catering.jpeg' %}" alt="catering picture">
+        <h3>03 | Catering</h3>
+        <p>Serve guests with quality equipment.</p>
+    </div>
+    <div class="cta-item">
+        <img src="{% static 'images/pictures/chairs.jpeg' %}" alt="tables&seats picture">
+        <h3>03 | Tables and Seatings</h3>
+        <p>Stylish seating for all events.</p>
+    </div>
+    <div class="cta-item">
+        <img src="{% static 'images/pictures/fridge.jpeg' %}" alt="miscellaneous picture">
+        <h3>03 | Miscellaneous </h3>
+        <p>Keep events cool and comfortable.</p>
+    </div>
+</section>
+
+{% endblock  %}

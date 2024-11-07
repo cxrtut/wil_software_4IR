@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Terms and Conditions Page{% endblock  %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static "css/terms.css" %}">
+
+    <button onclick="goBack()" class="back-button">Go Back</button>
+
+    <div class="container">
+        <h1>Terms and Conditions</h1>
+
+        
+        <section>
+            <h2>1. Introduction</h2>
+            <p>Welcome to RentBox. By accessing or using our services, you agree to abide by the following terms and conditions. Please read them carefully before booking any equipment. These terms outline the agreement between you (the renter) and RentBox (the provider).</p>
+        </section>
+
+        
+        <section>
+            <h2>2. Booking and Payment</h2>
+            <p>All bookings must be confirmed with full payment to secure your rental. RentBox accepts various payment methods, including credit/debit cards and bank transfers. Prices are listed per item and are subject to change. The amount paid at the time of booking secures your rental at the current rate.</p>
+            <ul>
+                <li>Bookings can be made via our website or by contacting customer service.</li>
+                <li>Prices may vary based on equipment type, rental period, and delivery requirements.</li>
+                <li>RentBox reserves the right to change prices without prior notice.</li>
+            </ul>
+        </section>
+
+        
+        <section>
+            <h2>3. Cancellations and Refunds</h2>
+            <p>To cancel a booking, contact RentBox at least 48 hours before the rental period begins. The following cancellation policy applies:</p>
+            <ul>
+                <li>Cancellations made more than 48 hours in advance are eligible for a full refund.</li>
+                <li>Cancellations within 48 hours will incur a 50% cancellation fee.</li>
+                <li>No refunds will be provided for cancellations made after the rental period has started.</li>
+            </ul>
+        </section>
+
+        
+        <section>
+            <h2>4. Rental Period and Use of Equipment</h2>
+            <p>The rental period begins on the date specified in your booking confirmation and ends on the return or pickup date. RentBox expects all equipment to be returned on time and in the same condition it was delivered.</p>
+            <ul>
+                <li>Extensions can be requested but are subject to availability and additional fees.</li>
+                <li>Equipment must only be used for its intended purpose. Misuse may result in damage fees.</li>
+                <li>Late returns may incur additional charges, billed on a per-day basis.</li>
+            </ul>
+        </section>
+
+        
+        <section>
+            <h2>5. Damages, Loss, and Liability</h2>
+            <p>Customers are responsible for any loss or damage that occurs during the rental period. RentBox inspects equipment before delivery and expects the same condition upon return. Any loss, theft, or significant damage will result in repair or replacement fees, billed to the customer.</p>
+            <ul>
+                <li>Equipment will be inspected upon return, and any issues will be documented.</li>
+                <li>Damage or loss fees will be determined based on repair or replacement costs.</li>
+                <li>RentBox is not liable for any injury, damage, or loss incurred during equipment use.</li>
+            </ul>
+        </section>
+
+        
+        <section>
+            <h2>6. Delivery and Pickup</h2>
+            <p>RentBox offers delivery and pickup services for an additional fee based on location. Delivery times will be confirmed in advance, and customers are responsible for ensuring someone is available to receive the equipment.</p>
+            <ul>
+                <li>Delivery charges are calculated based on distance and are shown at checkout.</li>
+                <li>Customers opting for self-pickup must handle transportation and return.</li>
+                <li>If no one is available for delivery or pickup, a rescheduling fee may apply.</li>
+            </ul>
+        </section>
+
+        
+        <section>
+            <h2>7. Customer Conduct and Responsibilities</h2>
+            <p>Customers agree to use RentBox equipment responsibly and in accordance with local laws and regulations. Equipment should be used safely and returned on time. RentBox reserves the right to refuse service to customers who violate these terms.</p>
+        </section>
+
+        
+        <section>
+            <h2>8. Governing Law</h2>
+            <p>These terms and conditions are governed by the laws of South Africa. Any disputes arising from these terms will be handled in South African courts.</p>
+        </section>
+
+        
+        <section>
+            <h2>9. Contact Us</h2>
+            <p>If you have any questions about these terms, please contact us at support@rentbox.co.za. We are here to assist with any clarifications regarding our policies. Or you can check out our FAQs <a href="{% url "question" %}">page</a></p>
+        </section>
+    </div>
+
+
+{% endblock  %}

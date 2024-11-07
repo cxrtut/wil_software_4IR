@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}FAQs Page{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/question.css' %}">
+
+    <button onclick="goBack()" class="back-button">Go Back</button>
+
+    <div class="container">
+        <div class="faq-header">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about RentBox policies and services.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">What types of equipment does RentBox offer?</h2>
+            <p class="answer">We offer a variety of event equipment including tents, tables, seating, decor, catering supplies, lighting, and sound systems. Check our catalog for more details and availability.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">What is the rental period for equipment?</h2>
+            <p class="answer">The standard rental period is 48 hours, but we offer flexible options if you need equipment for a longer duration. Contact us for special arrangements.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">How do I place an order?</h2>
+            <p class="answer">To place an order, simply login or create an account then select the equipment you want, choose your rental dates, and proceed to checkout.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">What are the rental fees and payment options?</h2>
+            <p class="answer">Rental fees vary by equipment type and duration. We accept payments by credit/debit card, EFT, and other methods listed at checkout. Full payment is required to confirm a booking and an insurance amount.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">How does RentBox handle delivery and pickup?</h2>
+            <p class="answer">We offer delivery and pickup services across South Africa. Delivery fees are based on location, and details are available during the booking process. Customers can also opt for self-collection and return.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">Can I cancel my reservation?</h2>
+            <p class="answer">Yes, you can cancel your reservation within 48 hours of your rental date for a full refund.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question">What happens if equipment is damaged?</h2>
+            <p class="answer">If equipment is damaged during the rental period, additional fees may apply. We encourage clients to inspect equipment upon delivery. Damaged or missing items are assessed after each rental period.</p>
+        </div>
+    </div>
+
+    <script src="{% static 'javascript/scripting.js' %}"></script>
+{% endblock %}

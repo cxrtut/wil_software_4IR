@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} {{name}} Page{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static "css/equipment.css" %}">
+
+    <button onclick="goBack()" class="back-button">Go Back</button>
+
+    <h1>Types of {{ name }} offered</h1>
+    
+    {% if items %}
+
+        {% if name == 'Tent' %}
+        
+            <div class="items">
+                {% for tent in items %}
+                <div class="item" style = "padding-bottom: 90px;">
+                    <img src="{{tent.image_url}}" alt="tents equipment" />
+                    <h3>{{ tent.name }}</h3>
+                    <p>Size: {{ tent.dimensions }} | Price: R{{ tent.price_per_day }}</p>
+                    <hr style="width: 100%; margin: 10px auto;">
+                    <p>quantity left: {{ tent.quantity }}</p>
+                    <hr style="width: 100%; margin: 10px auto;">
+                    <p>{{ tent.desc }}</p>
+                </div>
+                {% empty %}
+                <p>No tents available.</p>
+                {% endfor %}
+            </div>
+        
+        {% else %}
+
+            <div class="items">
+                {% for item in items %}
+                <div class="item">
+                    <img src="{{item.image_url}}" alt="decor equipment" />
+                    <h3>{{ item.name }}</h3>
+                    <p>Price: R{{ item.price_per_day }} | quantity left: {{ item.quantity }}</p>
+                    <hr style="width: 100%; margin: 10px auto;">
+                    <p>{{ item.desc }}</p>
+                </div>
+                {% empty %}
+                <p>No decor items available.</p>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
+    {% else %}
+        <p>No items found for {{ item }}</p>
+    {% endif %}
+
+{% endblock %}

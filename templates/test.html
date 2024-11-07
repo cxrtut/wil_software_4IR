@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Modal Example</title>
+    <style>
+        /* CSS for Cart Modal and Table */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-icon span {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        /* Modal Style */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Table Styles */
+        #cart-table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        #cart-table th, #cart-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        #cart-table th {
+            background-color: #ffa500b3;
+            color: white;
+            font-size: 18px;
+        }
+        
+        #cart-table td {
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        
+        #checkout-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ffa500b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #checkout-btn:hover {
+            background-color: rgb(196, 136, 7);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="showCartModal()">
+        🛒 <span id="cart-count">0</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <h2>Cart Items</h2>
+            <table id="cart-table">
+                <thead>
+                    <tr>
+                        <th>Equipment</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Cart items will be dynamically added here -->
+                </tbody>
+            </table>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        
+        let cart = [
+            { id: 1, name: 'Tent', price: 200, quantity: 2 },
+            { id: 2, name: 'Chair', price: 50, quantity: 4 },
+            { id: 3, name: 'Table', price: 100, quantity: 1 }
+        ];
+
+        function updateCartCount() {
+            const cartCount = cart.length;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        
+        function showCartModal() {
+            const modal = document.getElementById('cart-modal');
+            const tableBody = document.querySelector('#cart-table tbody');
+
+           
+            tableBody.innerHTML = '';
+
+            
+            cart.forEach(item => {
+                let row = document.createElement('tr');
+
+                let nameCell = document.createElement('td');
+                nameCell.innerText = item.name;
+                row.appendChild(nameCell);
+
+                let quantityCell = document.createElement('td');
+                quantityCell.innerText = item.quantity;
+                row.appendChild(quantityCell);
+
+                let priceCell = document.createElement('td');
+                priceCell.innerText = 'R' + item.price;
+                row.appendChild(priceCell);
+
+                tableBody.appendChild(row);
+            });
+
+            
+            modal.style.display = 'block';
+        }
+
+        
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            alert('Proceeding to checkout...');
+            
+        });
+
+        
+        updateCartCount();
+    </script>
+
+</body>
+</html>

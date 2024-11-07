@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    background-image: url('/static/images/pictures/image.jpg'); 
+    background-size: cover;
+    background-position: center; 
+    color: #fff;
+    padding: 60px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 800px; 
+}
+
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.shop-btn {
+    background-color: transparent;
+    color: white; 
+    padding: 15px 30px;
+    border: 2px solid #ffa500b3; 
+    cursor: pointer;
+    font-size: 20px;
+    align-self: flex-start;
+    transition: border-color 0.3s ease; 
+    border-radius: 30%;
+    text-decoration: none;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background-color: orange;
+    color: white;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-item h3 {
+    font-size: 24px;
+}
+
+.feature-item p {
+    font-size: 16px;
+}
+
+.about-section {
+    display: flex;
+    padding: 40px;
+}
+
+.about-text {
+    flex: 1;
+    padding: 20px;
+    color: black;
+    padding-top: 250px;
+}
+
+.about-text h2 {
+    font-size: 36px;
+}
+
+.about-text p {
+    font-size: 18px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+}
+
+.cta-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+.cta-item {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    flex: 1;
+    margin: 0 20px;
+}
+
+.cta-item img {
+    width: 100%;
+    height: 70%;
+    padding-bottom: 50px;
+}
