@@ -1,8 +1,0 @@
-<h1>Vegetable Products</h1>
-<ul>
-    {% for product in vegetable_products %}
-        <li>
-            <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a> - ${{ product.price }}
-        </li>
-    {% endfor %}
-</ul>
