@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Payment Successful</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        .invoice-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .invoice-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .invoice-header p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .invoice-details {
+            margin-bottom: 30px;
+        }
+
+        .invoice-details h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .product-content {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .product p {
+            margin: 5px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .total-amount {
+            text-align: right;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .thank-you {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .thank-you h3 {
+            font-size: 1.8rem;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .thank-you p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .invoice-footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .invoice-footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .invoice-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .invoice-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .invoice-header h1 {
+                font-size: 2rem;
+            }
+
+            .invoice-details h2 {
+                font-size: 1.5rem;
+            }
+
+            .total-amount {
+                font-size: 1.2rem;
+            }
+
+            .thank-you h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+            <p>Thank you for your purchase! Below are the details of your order.</p>
+        </div>
+
+        <div class="invoice-details">
+            <h2>Order Details</h2>
+            <ul class="product-list">
+                {% for product in products %}
+                <li class="product">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                        <p class="price">R{{ product.price }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="total-amount">
+            <p>Total Amount: R{{ total_amount }}</p> <!-- Pass the total amount from the view -->
+            <p>Total Items: {{ products|length }}</p> <!-- Number of items in the order -->
+        </div>
+
+        <div class="thank-you">
+            <h3>Thank You for Your Purchase!</h3>
+            <p>Your payment was successful. You can now enjoy your products!</p>
+        </div>
+
+        <div class="invoice-footer">
+            <p>For support, contact us at <a href="mailto:support@company.com">support@company.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

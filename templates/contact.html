@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+    <style>
+        /* Enlarge the background video */
+        .enlarged-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;  /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+            object-fit: cover; /* Crop the video to fill the viewport */
+            z-index: -1; /* Place behind other content */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            position: relative;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ff6a00, #ffcc00);
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #ffcc00; /* Gold hover color */
+        }
+
+        .navbar .cart-icon {
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Heading over video */
+        .video-heading {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff; /* White text color */
+            font-size: 4rem; /* Large font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for visibility */
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Contact form container */
+        .container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 600px;
+            margin: 100px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #6a0dad; /* Purple */
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #4b0082; /* Darker purple on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__logo">
+            <a href="index.html"><img src="static/img/logo.png" alt="Logo" style="height: 50px;"></a>
+        </div>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="{% url 'auth_contact' %}">Contact Us</a></li>
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        </ul>
+        <div class="cart-icon">
+            <a href="{% url 'auth_login' %}" id="cartLink"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </nav>
+
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline class="enlarged-video">
+        <source src="static/images/myvideo1.mp4" type="video/mp4">
+    </video>
+
+    <!-- Heading -->
+    <div class="video-heading"><marquee   direction="right" style="background-color: aqua;">TUT Fruits and Vege iStock</marquee></div>
+
+    <!-- Contact Form -->
+    <div class="container mt-5">
+        <h1 class="text-center">Contact Us</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+ 
+</body>
+</html>

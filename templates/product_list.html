@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List with Zoom Effect</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="static/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="static/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* General styling */
+     
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Background Video */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensures video is behind the content */
+        }
+        .search-container {
+            position: relative;
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 12px 40px 12px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            border: 2px solid #ccc;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        #searchBar:focus {
+            border-color: #007bff;
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+        }
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.2rem;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        .product {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .product:hover img {
+            transform: scale(1.1);
+        }
+        .product-content {
+            padding: 15px;
+        }
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .product p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .product .price {
+            font-size: 1.1rem;
+            color: #28a745;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .cart-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cart-button:hover {
+            background-color: #0056b3;
+        }
+        /* Cart styles */
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .cart-icon .item-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .cart-items {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cart-items.active {
+            display: block;
+        }
+        #checkout-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            width: 100%;
+            margin: 20px auto;
+        }
+        #checkout-button:hover {
+            background-color: #218838;
+        }
+
+        .quantity-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .quantity-button:hover {
+            background-color: #0056b3;
+        }
+
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+
+  
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #333;
+            color: white;
+            font-size: 1.5rem;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            background-color: #575757;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                padding: 10px;
+                font-size: 1.2rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+            }
+        }
+
+
+    
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('static/img/categories/lettuce.jpg'); /* Replace this with your image URL */
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+}
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #333;
+            color: white;
+            font-size: 1.5rem;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            background-color: #575757;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                padding: 10px;
+                font-size: 1.2rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'auth_login' %}">Login</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'index' %}">Logout</a>
+
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+            
+        </div>
+        <p style="color: red;"> Welcome, {{ user.username }}!
+            You have successfully logged in</p>  
+     
+       </div>
+    </div>
+
+</body>
+</html>
+
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="background-video">
+        <source src="static/videos/background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <h1>Our Product Collection</h1>
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search for a product..." onkeyup="filterProducts()">
+        <span class="search-icon">🔍</span>
+    </div>
+    <ul class="product-list">
+        {% for product in products %}
+        <li class="product">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div class="product-content">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p class="price">R{{ product.price }}</p>
+                <button class="cart-button" onclick="addToCart('{{ product.id }}', '{{ product.name }}', '{{ product.price }}')">Add to Cart</button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒
+        <div class="item-count" id="cart-item-count">0</div>
+    </div>
+    <div class="cart-items">
+        <h3>Your Cart</h3>
+        <div class="cart-content"></div>
+        <button id="checkout-button" onclick="checkout()"">Checkout</button>
+    </div>
+
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <center>
+        <h1>OUR LOCATION</h1>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28765.83081660044!2d28.1739264!3d-25.680281599999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sza!4v1731853048921!5m2!1sen!2sza" width="1700" height="450" style="border:0;" allowfullscreen=""  position="absolute" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+       </center>
+       
+    <script>
+        
+        
+(function() {
+    var d = document;
+    var s = d.createElement("script");
+    s.src = "https://sitespeak.ai/chatbots/d1b6d6dc-498e-4740-a358-540829261b1b.js";
+    s.async = true;
+    d.getElementsByTagName("head")[0].appendChild(s);
+})();
+
+        let cart = [];
+        
+        function addToCart(id, name, price) {
+            const product = { id, name, price, quantity: 1 };
+            const index = cart.findIndex(item => item.id === id);
+            if (index !== -1) {
+                cart[index].quantity++;
+            } else {
+                cart.push(product);
+            }
+            updateCart();
+        }
+
+        var stripe = Stripe('pk_test_51QKID6ClB8H0E4ykZqhpuidwZW69kKF4n2RR6q33n2zdgl5CW1NZbh4KA76kLhQTvcTJyRnKIwr1EN13x8KQjKjZ00NXgIRdJx'); 
+
+function calculateTotal() {
+    let total = 0;
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+    });
+    return total;  // Return the total cost
+}
+
+
+        function updateCart() {
+            const cartContent = document.querySelector('.cart-content');
+            const cartItemCount = document.getElementById('cart-item-count');
+            cartContent.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartContent.innerHTML += `
+                    <div class="cart-item">
+                        <p>${item.name} (R${item.price})</p>
+                        <div>
+                            <button class="quantity-button" onclick="changeQuantity('${item.id}', 'increase')">+</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-button" onclick="changeQuantity('${item.id}', 'decrease')">-</button>
+                        </div>
+                        <button class="remove-button" onclick="removeItem('${item.id}')">Remove</button>
+                    </div>
+                `;
+            });
+            cartItemCount.textContent = cart.length;
+            cartContent.innerHTML += `<p>Total: R${total}</p>`;
+        }
+
+        function toggleCart() {
+            const cartItems = document.querySelector('.cart-items');
+            cartItems.classList.toggle('active');
+        }
+
+        function changeQuantity(id, action) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index !== -1) {
+                if (action === 'increase') {
+                    cart[index].quantity++;
+                } else if (action === 'decrease' && cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                }
+                updateCart();
+            }
+        }
+        function updateCartDisplay() {
+            const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
+            cartList.innerHTML = ''; // Clear the cart list
+
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('li');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <span>${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</span>
+                    <button class="remove-button" onclick="removeFromCart('${item.id}')">Remove</button>
+                    <button class="cart-button" onclick="updateQuantity('${item.id}', 'increase')">+</button>
+                    <button class="cart-button" onclick="updateQuantity('${item.id}', 'decrease')">-</button>
+                `;
+                cartList.appendChild(cartItem);
+                totalPrice += item.price * item.quantity;
+            });
+
+            cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+        }
+
+                
+function updateQuantity(itemName, newQuantity) {
+  const item = cart.find((cartItem) => cartItem.itemName === itemName);
+  if (item && newQuantity > 0) {
+    item.quantity = newQuantity;
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  showCartModal();
+  updateCartCount();
+}
+
+function checkout() {
+    // Calculate the total price
+    let total = 0;
+    cart.forEach((item) => {
+        total += item.price * item.quantity;
+    });
+
+    // Prepare data to send to the backend
+    const payload = {
+        cart: cart.map(item => ({
+            id: item.id, // Product ID
+            name: item.name,
+            price: parseFloat(item.price), // Ensure price is a float
+            quantity: parseInt(item.quantity, 10) // Ensure quantity is an integer
+        })),
+        total: parseFloat(total), // Total price
+        user: "{{ user.username }}" // Username (make sure this is passed from Django context)
+    };
+
+            // Fetching the session from the backend with the cart and total amount
+   // Send cart data to the backend
+  
+    // Send the cart data to the backend
+    fetch('/create_checkout_session/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // CSRF token for Django
+        },
+        body: JSON.stringify(payload) // Send the payload as JSON
+    })
+    .then(function (response) {
+        if (response.ok) {
+            return response.json(); // Handle the response from the server
+        } else {
+            alert('Checkout failed!');
+        }
+    })
+    .then(function (data) {
+        // Assuming the server returns a checkout session URL or success message
+        if (data.session_url) {
+            window.location.href = data.session_url; // Redirect to the payment page (if using a service like Stripe)
+        } else {
+            alert('Something went wrong. Please try again later.');
+        }
+    })
+    .catch(function (error) {
+        console.error('Error during checkout:', error);
+    });
+}
+//
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+
+        function getCSRFToken() {
+            const csrfToken = document.cookie.split(";").find(row => row.startsWith("csrftoken"));
+            return csrfToken ? csrfToken.split("=")[1] : "";
+        }
+
+
+
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const productItems = document.querySelectorAll('.product');
+            productItems.forEach(item => {
+                const productName = item.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        
+    </script>
+</body>
+</html>

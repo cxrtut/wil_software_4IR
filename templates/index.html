@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <title>Navigation Bar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="static/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="static/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #333;
+            color: white;
+            font-size: 1.5rem;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            background-color: #575757;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                padding: 10px;
+                font-size: 1.2rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+            }
+        }
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .cart-icon .item-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .cart-items {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cart-items.active {
+            display: block;
+        }
+    </style>
+
+
+    
+</head>
+
+<body style="background-color:white;">
+
+    <center>
+        <div class="navbar">
+            <a href="#home" style="font-size: 1.5rem;">Home</a>
+            <a href="{%  url 'auth_login' %}" style="font-size: 1.5rem;margin-right: 10px;">Login</a>
+            <a href="{%  url 'about' %}" style="font-size: 1.5rem;">about</a>
+            <a href="{%  url 'auth_login'   %}" style="font-size: 1.5rem;">SHOP NOW</a>
+            
+            <div class="dropdown">
+              <button class="dropbtn" style="font-size: 1.5rem;">Dropdown 
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div> 
+          </div>
+              
+    </center>
+
+           
+    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+        <div class="hero__text">
+            <div class="video-heading">TUT Fruits and Vege istock</div>
+            <video autoplay loop muted playsinline width="1000" height="1000" class="enlarged-video">
+                <source src="static/images/myvideo1.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+                
+    <div class="cart-items">
+        <h3>Your Cart</h3>
+        <div class="cart-content"></div>
+        <button id="checkout-button">Checkout</button>
+    </div>
+
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <div id="chatbot-header">Chat with Us</div>
+        <div id="chatbot-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div id="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot toggle button -->
+    <div id="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+
+
+
+    <div class="cart">
+        <div class="cart-title">Cart Items</div>
+        <div class="cart-content">
+            <!-- Cart items will be dynamically loaded here -->
+        </div>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">Rs.0</div>
+        </div>
+      
+        <ion-icon name="close" id="cart-close"></ion-icon>
+    </div>
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input
+                            type="text"
+                            id="search-input"
+                            placeholder="Search for items..."
+                            onkeyup="filterItems()"
+                            style="width: 100%; padding: 10px; margin-bottom: 20px; font-size: 1rem;"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                     
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*" style="color: white ;font: 2em sans-serif;;">All</li>
+                            <li data-filter=".oranges" style="color: white;font: 2em sans-serif;">Fruits</li>
+                            <li data-filter=".fresh-meat" style="color: white;font: 2em sans-serif;">vegetables</li>
+                            <li data-filter=".vegetables" style="color: white;font: 2em sans-serif;">Fruits</li>
+                            <li data-filter=".fastfood"  style="color: white;font: 2em sans-serif;">vegetables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           
+          
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg"     data-setbg="static/img/categories/lettuce.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{%url 'auth_login' %}">Lettuce</a></h6>
+                            <h5>R20</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Orange.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{%url 'product_list' %}">Orange</a></h6>
+                            <h5>R5</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Banana.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'auth_login' %}">Banana</a></h6>
+                            <h5>R20</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Purple_G.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'auth_login' %}">Green </a></h6>
+                            <h5>R30</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Potatos.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'auth_login' %}">Potatos</a></h6>
+                            <h5>R17</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Water_M.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{%url 'auth_login' %}">WaterMellon</a></h6>
+                            <h5>R35</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Zicchini.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'auth_login' %}">Zicchini</a></h6>
+                            <h5>R32</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="static/img/categories/Red_Onion.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{%  url 'auth_login'  %}">Red Onion</a></h6>
+                            <h5>R17</h5>
+                        </div>
+                    </div>
+                </div>
+      
+        </div>
+    </section>
+    
+
+    
+    <!-- Header Section End -->
+
+   <center>
+    <h1>OUR LOCATION</h1>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d28765.83081660044!2d28.1739264!3d-25.680281599999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sza!4v1731853048921!5m2!1sen!2sza" width="1700" height="450" style="border:0;" allowfullscreen=""  position="absolute" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+   </center>
+
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>Contact Us</title>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+   </head>
+   <body>
+       <div class="container mt-5">
+           <h1>Contact Us</h1>
+           <form method="post">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button type="submit" class="btn btn-primary"><a href="{% url 'auth_contact' %}">Contact Us</a></button>
+           </form>
+       </div>
+   </body>
+   </html>
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="static/img/logo.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: Pretoria North</li>
+                            <li>Phone:  0608175627</li>
+                            <li>Email: kbmagoda2024@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
+                            <li><a href="{%   url 'product_list' %}"> Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="{%  url 'privacy' %}">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="{%  url 'contact' %}">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your mail">
+
+                       <a href="{% url 'auth_subscribe'  %}" class="site-btn">Subscribe</a>
+                        
+                    
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="https://www.facebook.com/TmanG0g0"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="static/img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const cartIcon = document.querySelector('#cart-icon');
+    const cart = document.querySelector('.cart');
+    const cartClose = document.querySelector('#cart-close');
+
+    // Open the cart when the cart icon is clicked
+    cartIcon.addEventListener('click', () => {
+        cart.classList.add('cart-active');
+    });
+
+    // Close the cart when the close icon is clicked
+    cartClose.addEventListener('click', () => {
+        cart.classList.remove('cart-active');
+    });
+
+    // Optional: Close the cart if clicking outside the cart area
+    document.addEventListener('click', (event) => {
+        if (!cart.contains(event.target) && !cartIcon.contains(event.target)) {
+            cart.classList.remove('cart-active');
+        }
+    });
+});
+
+
+        // Toggle chatbot visibility
+        function toggleChatbot() {
+            const chatbot = document.getElementById("chatbot");
+            chatbot.style.display = (chatbot.style.display === "none" || chatbot.style.display === "") ? "flex" : "none";
+        }
+
+        // Function to handle sending messages
+        function sendMessage() {
+            const inputField = document.getElementById("chat-input");
+            const message = inputField.value.trim();
+            if (message !== "") {
+                displayMessage(message, "user");
+                inputField.value = "";
+
+                // Simulate a bot response (you can replace this with actual bot logic or an API call)
+                setTimeout(() => {
+                    displayMessage("Thanks for reaching out! How can I assist you today?", "bot");
+                }, 1000);
+            }
+        }
+
+        // Function to display messages in the chatbox
+        function displayMessage(message, sender) {
+            const messageContainer = document.createElement("div");
+            messageContainer.classList.add(sender === "user" ? "message-user" : "message-bot");
+            messageContainer.textContent = message;
+            document.getElementById("chatbot-messages").appendChild(messageContainer);
+            document.getElementById("chatbot-messages").scrollTop = document.getElementById("chatbot-messages").scrollHeight;
+        }
+    
+    </script>
+    <script>
+const intents = [
+  {
+    tag: "greeting",
+    patterns: ["Hi", "Hey", "Hello", "How are you?", "Good day", "Is anyone there?"],
+    responses: [
+      "Hello! Welcome to our Fruits & Veggies store. How can I assist you?",
+      "Hi! Looking for fresh produce? I'm here to help.",
+      "Hey! Need help with something specific?"
+    ],
+    followUp: [
+      "Please select an option below:",
+      "1. About products",
+      "2. About prices",
+      "3. About availability",
+      "4. About cart",
+      "5. About delivery"
+    ]
+  },
+  {
+    tag: "goodbye",
+    patterns: ["Bye", "See you later", "Goodbye"],
+    responses: ["Goodbye! Have a great day.", "See you soon! Stay healthy.", "Bye! Thanks for visiting."]
+  },
+  {
+    tag: "products",
+    patterns: ["Show me the products", "What do you sell?", "What items do you have?", "What fruits and vegetables are available?"],
+    responses: [
+      "Here are our available products: Lettuce, Mangoes, Onions, Carrots, Tomatoes, Apples, Potatoes, Bananas, and Zucchini. Let me know if you'd like more details on any of them!"
+    ]
+  },
+  {
+    tag: "price",
+    patterns: ["What is the price of lettuce?", "How much for mangoes?", "Can I see the prices?", "Show me prices of vegetables"],
+    responses: [
+      "Here are the prices for our products: Lettuce - $2.00, Mangoes - $1.50 each, Onions - $0.80/lb, Carrots - $1.00/lb. Let me know if you'd like to know more."
+    ]
+  },
+  {
+    tag: "availability",
+    patterns: ["Do you have mangoes?", "Are apples available?", "Is watermelon in stock?", "Do you have zucchini?"],
+    responses: [
+      "Yes, we have it in stock. Would you like to add it to your cart?",
+      "Unfortunately, it's currently unavailable. Can I suggest an alternative?"
+    ]
+  },
+  {
+    tag: "cart",
+    patterns: ["Add to cart", "Show my cart", "What is in my cart?", "Remove item from cart"],
+    responses: [
+      "Your cart currently contains the selected items. Let me know what you’d like to add or remove!"
+    ]
+  },
+  {
+    tag: "delivery",
+    patterns: ["Tell me about delivery", "Do you deliver?", "What are the delivery options?"],
+    responses: [
+      "yes,We offer delivery services from Monday to Saturday, between 9 AM and 6 PM. Would you like more details on delivery fees?"
+    ]
+  }
+];
+
+
+
+
+function toggleChatbot() {
+ const chatbot = document.getElementById('chatbot');
+ const toggle = document.getElementById('chatbot-toggle');
+ if (chatbot.style.display === "none" || chatbot.style.display === "") {
+     chatbot.style.display = "flex";
+     toggle.style.backgroundColor = "#0056b3";
+ } else {
+     chatbot.style.display = "none";
+     toggle.style.backgroundColor = "#007bff";
+ }
+}
+
+function sendMessage() {
+ const inputField = document.getElementById("chat-input");
+ const message = inputField.value.trim();
+ if (message !== "") {
+     displayMessage(message, "user");
+     inputField.value = "";
+
+     const response = getResponse(message);
+     setTimeout(() => {
+         displayMessage(response, "bot");
+     }, 1000);
+ }
+}
+
+
+
+
+
+
+(function() {
+    var d = document;
+    var s = d.createElement("script");
+    s.src = "https://sitespeak.ai/chatbots/d1b6d6dc-498e-4740-a358-540829261b1b.js";
+    s.async = true;
+    d.getElementsByTagName("head")[0].appendChild(s);
+})();
+
+<!-- / SiteSpeakAI -->
+
+function getResponse(message) {
+ for (let intent of intents) {
+     for (let pattern of intent.patterns) {
+         if (message.toLowerCase().includes(pattern.toLowerCase())) {
+             const responses = intent.responses;
+             return responses[Math.floor(Math.random() * responses.length)];
+         }
+     }
+ }
+ return "I'm sorry, I didn't understand that. Can you rephrase?";
+}
+
+function displayMessage(message, sender) {
+ const messageContainer = document.createElement("div");
+ messageContainer.classList.add(sender === "user" ? "message-user" : "message-bot");
+ messageContainer.textContent = message;
+ const chatbotMessages = document.getElementById("chatbot-messages");
+ chatbotMessages.appendChild(messageContainer);
+ chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+</script>
+<script>
+    function toggleChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        const chatToggle = document.getElementById('chatbot-toggle');
+        
+        if (chatbot.style.display === "none" || chatbot.style.display === "") {
+            chatbot.style.display = "flex";  // Show the chatbot
+            chatToggle.style.backgroundColor = "#0056b3";  // Change color when active
+        } else {
+            chatbot.style.display = "none";  // Hide the chatbot
+            chatToggle.style.backgroundColor = "#007bff";  // Reset to original color
+        }
+    }
+
+    
+</script>
+
+ <!-- Popup Container -->
+ <div class="overlay" id="overlay"></div>
+ <div class="popup-container" id="cartPopup">
+     <button class="close-btn" id="closePopup">&times;</button>
+     <h2>Cart</h2>
+     <p>Your cart is currently empty.</p>
+ </div>
+
+ <script>
+     // JavaScript to handle popup functionality
+     const cartLink = document.getElementById('cartLink');
+     const cartPopup = document.getElementById('cartPopup');
+     const overlay = document.getElementById('overlay');
+     const closePopup = document.getElementById('closePopup');
+
+     // Show popup
+     cartLink.addEventListener('click', (e) => {
+         e.preventDefault();
+         cartPopup.style.display = 'block';
+         overlay.style.display = 'block';
+     });
+
+     // Close popup
+     closePopup.addEventListener('click', () => {
+         cartPopup.style.display = 'none';
+         overlay.style.display = 'none';
+     });
+
+     // Close popup when clicking on the overlay
+     overlay.addEventListener('click', () => {
+         cartPopup.style.display = 'none';
+         overlay.style.display = 'none';
+     });
+ </script>
+ <script>
+    function filterItems() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const items = document.querySelectorAll(".featured__filter .mix");
+
+        items.forEach(item => {
+            const text = item.querySelector(".featured__item__text h6").innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "block"; // Show items that match
+            } else {
+                item.style.display = "none"; // Hide items that don't match
+            }
+        });
+    }
+</script>
+
+    <!-- Js Plugins -->
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/jquery.nice-select.min.js"></script>
+    <script src="static/js/jquery-ui.min.js"></script>
+    <script src="static/js/jquery.slicknav.js"></script>
+    <script src="static/js/mixitup.min.js"></script>
+    <script src="static/js/owl.carousel.min.js"></script>
+    <script src="static/js/main.js"></script>
+
+
+
+</body>
+
+</html>

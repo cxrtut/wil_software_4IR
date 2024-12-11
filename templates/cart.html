@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('lightBlue');
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .box {
+      color: white;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      background-color: #2f3542;
+      top: -5px;
+      right: 0;
+      padding: 3px;
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
+      border-radius: 50%;
+      z-index: 99;
+    }
+
+    #cart-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding-top: 10px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      padding: 4rem;
+      margin: auto;
+      width: 100%;
+    }
+
+    h2.title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+
+    .shop-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+      gap: 1.5rem;
+      justify-content: center;
+      align-content: center;
+    }
+
+    .food-box {
+      position: relative;
+      background-color: #fff;
+      padding: 10px;
+      box-shadow: 0 1px 4px rgba(40, 37, 37, 0.1);
+      border-radius: 3px;
+    }
+
+    .pic {
+      overflow: hidden;
+    }
+
+    .pic:hover img {
+      transform: scale(1.5);
+    }
+
+    .food-img {
+      transition: 0.4s;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+
+    .food-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ff6348;
+    }
+
+    .food-price {
+      font-weight: 500;
+    }
+
+    .add-cart {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: #2ed573;
+      color: white;
+      padding: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+
+    .add-cart:hover {
+      background-color: rgba(255, 0, 0, 0.786);
+    }
+
+    .cart {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 400px;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 1px 4px rgba(40, 37, 37, 0.1);
+      z-index: 100;
+    }
+
+    .cart-active {
+      right: 0;
+      transition: 0.5s;
+    }
+
+    .cart-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-box {
+      display: grid;
+      grid-template-columns: 32% 50% 18%;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .cart-img {
+      width: 75px;
+      height: 75px;
+      object-fit: cover;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      padding: 5px;
+    }
+
+    .detail-box {
+      display: grid;
+      row-gap: 0.5rem;
+    }
+
+    .price-box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cart-food-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #ff6348;
+      font-weight: 500;
+    }
+
+    .cart-price {
+      font-weight: 500;
+    }
+
+    .cart-quantity {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      outline: none;
+      width: 2.4rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .cart-remove {
+      font-size: 24px;
+      color: red;
+      cursor: pointer;
+    }
+
+    .total {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    .total-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .total-price {
+      margin-left: 0.5rem;
+    }
+
+    .btn-buy {
+      padding: 12px 20px;
+      background-color: #2f3542;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    #cart-close {
+      position: absolute;
+      top: 1rem;
+      right: 0.8rem;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .search-bar {
+      margin-bottom: 2rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-input {
+      padding: 10px;
+      font-size: 1rem;
+      width: 80%;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <a href="#" class="logo">
+        <ion-icon name="cafe"></ion-icon>
+        TUTFRUITSANDVEGE
+      </a>
+      <a href="{% url 'index' %}" class="logo">
+        <ion-icon name="cafe"></ion-icon>
+        Home
+      </a>
+      <a href="#" class="logo">
+        <ion-icon name="cafe"></ion-icon>
+        About Us
+      </a>
+      <a href="#" class="logo">
+        <ion-icon name="cafe"></ion-icon>
+        Contact us
+      </a>
+      <div class="box">
+        <div class="cart-count">0</div>
+        <ion-icon name="cart" id="cart-icon"></ion-icon>
+      </div>
+
+      <div class="cart">
+        <div class="cart-title">Cart Items</div>
+        <div class="cart-content"></div>
+        <div class="total">
+          <div class="total-title">Total</div>
+          <div class="total-price">Rs.0</div>
+        </div>
+      <a href="{% url 'auth_checkout'  %}">Place Order</a>
+        <ion-icon name="close" id="cart-close"></ion-icon>
+      </div>
+    </div>
+  </header>
+
+  
+  <div class="container">
+    <h2 class="title">Find Your Cravings Here!</h2>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="search-input" placeholder="Search for products..." />
+    </div>
+  
+
+    <div class="shop-content">
+      <!-- 14 food items -->
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">LETTUCE</h2>
+        <span class="food-price">Rs.20</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Orange.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Orange</h2>
+        <span class="food-price">Rs.5</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Red_Onion.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Red Onion</h2>
+        <span class="food-price">Rs.20</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Mango.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Mango</h2>
+        <span class="food-price">Rs.20</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Yellow_P.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Yellow Purple</h2>
+        <span class="food-price">Rs.17</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Potatos.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Potatos</h2>
+        <span class="food-price">Rs.17</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Zicchini.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Zicchini</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Maize.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Maize</h2>
+        <span class="food-price">Rs.25</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Onion.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Onion</h2>
+        <span class="food-price">Rs.12</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Grace_grape.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Green Grapes</h2>
+        <span class="food-price">Rs.30</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/Water_M.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">WaterMellon</h2>
+        <span class="food-price">Rs.40</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lichis.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">lichi</h2>
+        <span class="food-price">Rs.15</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Noodles</h2>
+        <span class="food-price">Rs.85</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Salad</h2>
+        <span class="food-price">Rs.95</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Sandwich</h2>
+        <span class="food-price">Rs.90</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Steak</h2>
+        <span class="food-price">Rs.250</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Cheesecake</h2>
+        <span class="food-price">Rs.90</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="{% static 'img/categories/lettuce.jpg' %}" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="static/img/categories/Purple_G.jpg" class="food-img"></div>
+        <h2 class="food-title">Ice Cream</h2>
+        <span class="food-price">Rs.60</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="img13.jpg" class="food-img"></div>
+        <h2 class="food-title">Coffee</h2>
+        <span class="food-price">Rs.50</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+      <div class="food-box">
+        <div class="pic"><img src="img14.jpg" class="food-img"></div>
+        <h2 class="food-title">Juice</h2>
+        <span class="food-price">Rs.80</span>
+        <ion-icon name="cart" class="add-cart"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cart = document.querySelector('.cart');
+    const btnCart = document.querySelector('#cart-icon');
+    const btnClose = document.querySelector('#cart-close');
+    const cartContent = document.querySelector('.cart-content');
+    const cartCount = document.querySelector('.cart-count');
+    const foodItems = document.querySelectorAll('.food-box');
+    const searchInput = document.getElementById('search-input');
+
+    let cartItems = [];
+
+    btnCart.addEventListener('click', () => cart.classList.add('cart-active'));
+    btnClose.addEventListener('click', () => cart.classList.remove('cart-active'));
+
+    foodItems.forEach(item => {
+      item.querySelector('.add-cart').addEventListener('click', () => {
+        const foodTitle = item.querySelector('.food-title').textContent;
+        const foodPrice = item.querySelector('.food-price').textContent;
+        const foodImage = item.querySelector('.food-img').src;
+
+        const cartItem = {
+          title: foodTitle,
+          price: foodPrice,
+          image: foodImage
+        };
+
+        cartItems.push(cartItem);
+        updateCart();
+      });
+    });
+
+    function updateCart() {
+      cartContent.innerHTML = '';
+      let total = 0;
+      cartItems.forEach((item, index) => {
+        total += parseFloat(item.price.replace('Rs.', ''));
+        const cartItem = `
+          <div class="cart-box">
+            <img src="${item.image}" class="cart-img">
+            <div class="detail-box">
+              <h3 class="cart-food-title">${item.title}</h3>
+              <div class="price-box">
+                <div class="cart-price">${item.price}</div>
+                <input type="number" class="cart-quantity" value="1">
+                <ion-icon name="trash" class="cart-remove" data-index="${index}"></ion-icon>
+              </div>
+            </div>
+          </div>
+        `;
+        cartContent.insertAdjacentHTML('beforeend', cartItem);
+      });
+
+      cartCount.textContent = cartItems.length;
+      document.querySelector('.total-price').textContent = `Rs.${total.toFixed(2)}`;
+
+      // Add event listeners for trash icons
+      const trashIcons = document.querySelectorAll('.cart-remove');
+      trashIcons.forEach(icon => {
+        icon.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          cartItems.splice(index, 1);  // Remove item from cart
+          updateCart();  // Update cart after deletion
+        });
+      });
+    }
+
+    searchInput.addEventListener('keyup', () => {
+      const query = searchInput.value.toLowerCase();
+      foodItems.forEach(item => {
+        const title = item.querySelector('.food-title').textContent.toLowerCase();
+        if (title.includes(query)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

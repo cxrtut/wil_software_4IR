@@ -1,0 +1,10 @@
+<h2>Verify OTP</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>We sent an OTP to your email. Please enter it below to verify your account.</p>
+    <div class="form-group">
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <label for="otp">OTP</label>
+    </div>
+    <button type="submit">Verify</button>
+</form>
