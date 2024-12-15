@@ -26,7 +26,7 @@ STATIC_DIR=os.path.join(BASE_DIR,"static")
 SECRET_KEY = 'django-insecure-55qmys+yvw5u88xilu^7vd3)k-%mb85yh!m0!d!n^&!t=a&tg3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 STRIPE_TEST_PUBLIC_KEY ='pk_test_51QMqsaEeTeKgicdtLPjUOcShME6OtHSLakMOjK3wH56TUPZDfu8U7adM8by4Cmgy30NysUwBQPgcghbXlbBSpJnj00tQz2Jp0S'  # Replace with your Stripe public key
 STRIPE_SECRET_KEY = 'sk_test_51QMqsaEeTeKgicdttMboVjy6RlEpcBrcwP8EQDJj5cU0cPN2npdI7GPgZFX9Zh4b8MIf3IHeHQof1lw2wewBhZop00iSsgrOpf'  # Replace with your Stripe secret key
